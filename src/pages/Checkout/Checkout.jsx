@@ -101,7 +101,7 @@ export default function CheckoutPage() {
             type="numeric"
             disabled={loading}
             value={wishlistId || ""}
-            placeholder="Insert a child id..."
+            placeholder="Insert a wishlist id..."
             onChange={({ target: { value } }) => {
               const candidate = Number(value);
               if (Number.isInteger(candidate)) setWishlistId(candidate);
@@ -146,15 +146,18 @@ export default function CheckoutPage() {
       </LeftMenu>
 
       <WishlistSection ref={wishlistSectionRef}>
-        <AnimateSharedLayout>
+              <AnimateSharedLayout>
+              <h1 style={{ fontSize: 16, marginTop: 8 }}>
+                Droppe Xmas 
+                              </h1>
           <AnimatePresence>
-            {wishlists.map((item) => (
+                    {wishlists.map((item) => (
               <WishlistCard
                 key={item.wishlist.id}
                 {...{ ...item, discounts }}
                 onDeleted={(wishlist) => {
                   dispatch({ type: "REMOVE_WISHLIST", payload: wishlist });
-                  rejectWishlist(wishlist);
+                  rejectWishlist(item);
                 }}
                 onProductRemoved={({ id }) =>
                   dispatch({
@@ -224,13 +227,25 @@ const LeftMenu = styled.aside`
 const WishlistSection = styled.section`
   flex: 1;
   padding: 64px;
-  padding-top: 128px;
+  padding-top: 12px;
   flex-direction: column;
   justify-content: center;
 
   overflow: auto;
   background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"%3E%3Cpath fill="%239C92AC" fill-opacity="0.4" d="M1 3h1v1H1V3zm2-2h1v1H3V1z"%3E%3C/path%3E%3C/svg%3E');
+  > h1 {
+    border-radius: 4px;
+  padding: 16px 32px;
 
+  background-color: rgb(113, 105, 105);
+  box-shadow: 4px 8px 12px 6px rgba(15, 15, 15, 0.3);
+  font-size: 62px;
+  font-weight: bold;
+  font-family: "Fraunces";
+text-align: center;
+   margin-bottom: 32px;
+
+  }
   > div {
     margin-top: 64px;
   }
@@ -238,6 +253,8 @@ const WishlistSection = styled.section`
   > div:first-of-type {
     margin: 0;
   }
+  
+  
 
   @media (max-width: 768px) {
     padding: 32px;
