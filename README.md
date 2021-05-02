@@ -1,5 +1,4 @@
-# Getting Started with Droppe Xmas App
-
+# Getting Started with Wishlist Project App
 First you must download the repo.
 
 In the project directory, you can run:
